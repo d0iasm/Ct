@@ -63,7 +63,6 @@ class LinkedList(object):
         return False
 
 
-
 class Test(unittest.TestCase):
     data = [1,2,3,4,5]
 
@@ -84,12 +83,10 @@ class Test(unittest.TestCase):
         self.assertTrue(ll.is_empty())
         self.assertIsNone(ll.search(1))
 
-
     def test_append_nothing(self):
         ll = LinkedList()
         self.assertTrue(ll.is_empty())
         self.assertIsNone(ll.search(0))
-
 
     def test_search_none(self):
         ll = LinkedList()
