@@ -14,11 +14,11 @@ def add_lists(l1, l2):
         carry = 1 if (s + carry) >= 10 else 0
         n1 = n1.next
         n2 = n2.next
-       
+
     while n1:
         if carry == 1:
             result.append((n1.data + carry) % 10)
-            carry = 1 if n1.data + carry >= 10 else 0 
+            carry = 1 if n1.data + carry >= 10 else 0
         else:
             result.append(n1.data)
         n1 = n1.next
@@ -26,7 +26,7 @@ def add_lists(l1, l2):
     while n2:
         if carry == 1:
             result.append((n2.data + carry) % 10)
-            carry = 1 if n2.data + carry >= 10 else 0 
+            carry = 1 if n2.data + carry >= 10 else 0
         else:
             result.append(n2.data)
         n2 = n2.next
@@ -63,13 +63,13 @@ def add_lists_optimized(l1, l2):
 
 
 def add_lists_recursively(n1, n2, carry=0):
-    if n1 == None and n2 == None and carry == 0:
+    if n1 is None and n2 is None and carry == 0:
         return None
 
     val = carry
-    if n1 != None:
+    if n1 is not None:
         val += n1.data
-    if n2 != None:
+    if n2 is not None:
         val += n2.data
 
     result_head = Node(val % 10)
@@ -79,7 +79,7 @@ def add_lists_recursively(n1, n2, carry=0):
                                      n2.next if n2 else None,
                                      1 if val >= 10 else 0)
         result_head.next = more
-    
+
     return result_head
 
 
@@ -93,7 +93,7 @@ class Test(unittest.TestCase):
         for l1d, l2d in zip(l1_data, l2_data):
             l1.append(l1d)
             l2.append(l2d)
-        
+
         result = add_lists(l1, l2)
         n = result.head
         for e in expected:
