@@ -31,6 +31,15 @@ class LinkedList(object):
             cur = cur.next
         cur.next = n
 
+    def insert(self, data):
+        n = Node(data)
+        if not self.head:
+            self.head = n
+            return
+
+        n.next = self.head
+        self.head = n
+
     def delete(self, data):
         n = self.head
         if n.data == data:
@@ -87,6 +96,16 @@ class Test(unittest.TestCase):
         ll = LinkedList()
         self.assertTrue(ll.is_empty())
         self.assertIsNone(ll.search(0))
+
+    def test_insert(self):
+        ll = LinkedList()
+        for d in self.data:
+            ll.insert(d)
+
+        n = ll.head
+        for d in reversed(self.data):
+            self.assertEqual(d, n.data)
+            n = n.next
 
     def test_search_none(self):
         ll = LinkedList()
