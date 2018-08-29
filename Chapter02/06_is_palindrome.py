@@ -31,6 +31,7 @@ def is_palindrome_loop(ll):
         slow = slow.next
         fast = fast.next.next
 
+    # Pass a middle element when a list number is odd
     if fast is not None:
         slow = slow.next
 
@@ -41,8 +42,32 @@ def is_palindrome_loop(ll):
     return True
 
 
+def length(n):
+    result = 0
+    while n:
+        result += 1
+        n = n.next
+    return result
+
+
+def recurse(n, length):
+    if length == 0 or length == 1:
+        return 0
+
+    recurse(n.next, length-2)
+
+
 def is_palindrome_recusively(ll):
+    # TODO: Implement.
     pass
+    
+    # head = ll.head
+    # length = length(head)
+    # if head is None or length <= 0:
+        # return head, 0
+
+    # res = is_palindrome_recusively(head.next)
+
 
 
 class Test(unittest.TestCase):
