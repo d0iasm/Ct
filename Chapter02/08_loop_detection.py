@@ -59,7 +59,7 @@ class Test(unittest.TestCase):
         self.assertFalse(loop_detection(ll))
 
 
-    def test_loop_detection_runner_true(self):
+    def test_loop_detection_runner_find_first_element(self):
         ll = LinkedList()
         head = Node(0)
         ll.head = head
@@ -70,6 +70,22 @@ class Test(unittest.TestCase):
         n.next = ll.head
             
         self.assertEqual(0, loop_detection_runner(ll).data)
+
+
+    def test_loop_detection_runner_find_second_element(self):
+        ll = LinkedList()
+        head = Node(0)
+        ll.head = head
+        n = ll.head
+        second = Node(1)
+        n.next = second
+        n = n.next
+        for i in range(2, 5):
+            n.next = Node(i)
+            n = n.next
+        n.next = second
+            
+        self.assertEqual(1, loop_detection_runner(ll).data)
 
 
     def test_loop_detection_runner_false(self):
