@@ -50,24 +50,25 @@ def length(n):
     return result
 
 
-def recurse(n, length):
-    if length == 0 or length == 1:
-        return 0
+def is_palindrome_recusive_helper(fn, length):
+    if fn is None or length == 0:
+        return fn, True
+    if length == 1:
+        return fn.next, True
 
-    recurse(n.next, length-2)
+    bn, res = is_palindrome_recusive_helper(fn.next, length-2)
+
+    if res is False or bn is None:
+        return bn, res
+   
+    return bn.next, True if fn.data == bn.data else False
 
 
 def is_palindrome_recusively(ll):
-    # TODO: Implement.
-    pass
-    
-    # head = ll.head
-    # length = length(head)
-    # if head is None or length <= 0:
-        # return head, 0
-
-    # res = is_palindrome_recusively(head.next)
-
+    head = ll.head
+    leng = length(head)
+    n, result = is_palindrome_recusive_helper(head, leng)
+    return result
 
 
 class Test(unittest.TestCase):
@@ -112,6 +113,27 @@ class Test(unittest.TestCase):
         for d in data:
             ll.append(d)
         self.assertTrue(is_palindrome_loop(ll))
+
+    def test_is_palindrome_recusively_true(self):
+        ll = LinkedList()
+        data = [1,2,3,3,2,1]
+        for d in data:
+            ll.append(d)
+        self.assertTrue(is_palindrome_recusively(ll))
+
+    def test_is_palindrome_recusively_false(self):
+        ll = LinkedList()
+        data = [1,2,3,4,5,6,7]
+        for d in data:
+            ll.append(d)
+        self.assertFalse(is_palindrome_recusively(ll))
+
+    def test_is_palindrome_recusively_zero(self):
+        ll = LinkedList()
+        data = []
+        for d in data:
+            ll.append(d)
+        self.assertTrue(is_palindrome_recusively(ll))
 
 
 if __name__ == '__main__':
