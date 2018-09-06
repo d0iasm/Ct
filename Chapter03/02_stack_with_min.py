@@ -17,7 +17,7 @@ class StackWithMinByDoubleStack(object):
         if len(self.mins) == 0:
             self.mins.append(value)
 
-        if value < self.get_min():
+        if value <= self.get_min():
             self.mins.append(value)
 
     def pop(self):
@@ -44,6 +44,8 @@ class StackWithMinByDoubleStack(object):
         return self.index == self.capacity
 
     def get_min(self):
+        if len(self.mins) == 0:
+            return sys.maxsize
         return self.mins[len(self.mins) - 1]
 
 
@@ -160,11 +162,9 @@ class Test(unittest.TestCase):
         for d in data:
             stack.push(d)
 
-        for i in range(len(expected)):
-            # TODO: The bug for get min
-            print(stack.get_min(), stack.mins, expected)
-            self.assertEqual(0, stack.get_min())
-            self.assertEqual(expected[i], stack.pop())
+        for e in expected:
+            self.assertEqual(e, stack.get_min())
+            self.assertEqual(e, stack.pop())
 
 
 if __name__ == '__main__':
