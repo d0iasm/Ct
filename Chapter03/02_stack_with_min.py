@@ -27,7 +27,7 @@ class StackWithMinByDoubleStack(object):
         value = self.values[self.index]
         self.values[self.index] = sys.maxsize
 
-        if value == self.get_min() and len(self.mins) > 1:
+        if value == self.get_min():
             self.mins.pop()
 
         return value
