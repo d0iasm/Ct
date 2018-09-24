@@ -4,12 +4,8 @@ import unittest
 class Node(object):
     def __init__(self, name):
         self.name = name
-        self.children = []
         self.left = None
         self.right = None
-
-    def add_child(self, node):
-        self.children.append(node)
 
     def add_left(self, node):
         self.left = node
