@@ -38,6 +38,18 @@ def post_order(node):
         post_order_result.append(node.name)
 
 
+bfs_result = []
+def bfs(node):
+    bfs_result.append(node.name)
+    queue = [node.left, node.right]
+    while queue:
+        n = queue.pop(0)
+        if n is not None:
+            bfs_result.append(n.name)
+            queue.append(n.left)
+            queue.append(n.right)
+
+
 class Test(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(Test, self).__init__(*args, **kwargs)
@@ -68,6 +80,11 @@ class Test(unittest.TestCase):
         expected = [3, 4, 1, 5, 2, 0]
         post_order(self.tree)
         self.assertEqual(expected, post_order_result)
+
+    def test_bfs(self):
+        expected = [0, 1, 2, 3, 4, 5]
+        bfs(self.tree)
+        self.assertEqual(expected, bfs_result)
 
 
 if __name__ == '__main__':
