@@ -7,18 +7,21 @@ class BinaryHeapTree(object):
 
     def push(self, data):
         self.heap.append(data)
-        self.siftup()
+        self.up_heap()
 
     def pop(self):
+        if len(self.heap) == 1:
+            return self.heap.pop()
+
         min_element = self.heap[0]
         self.heap[0] = self.heap.pop()
-        self.siftdown()
+        self.down_heap()
         return min_element
 
     def peek(self):
         return self.heap[0]
 
-    def siftup(self):
+    def up_heap(self):
         idx = len(self.heap) - 1
         while idx > 0:
             if self.heap[(idx-1) // 2] > self.heap[idx]:
@@ -28,20 +31,18 @@ class BinaryHeapTree(object):
             else:
                 return
 
-    def siftdown(self):
+    def down_heap(self):
         idx = 0
-        while idx < len(self.heap):
-            left = self.heap[idx*2 + 1]
-            right = self.heap[idx*2 + 2]
-            if left <= right and self.heap[idx] > left:
-                self.heap[idx*2 + 1] = self.heap[idx]
-                self.heap[idx] = left
-                idx = idx*2 + 1
-            
-            if right < left and self.heap[idx] > right:
-                self.heap[idx*2 + 2] = self.heap[idx]
-                self.heap[idx] = right
-                idx = idx*2 + 2
+        while (idx*2+1) < len(self.heap):
+            nextidx = idx*2 + 1
+            if nextidx + 1 < len(self.heap):
+                if self.heap[nextidx+1] < self.heap[nextidx]:
+                    nextidx = nextidx + 1
+           
+            if self.heap[idx] > self.heap[nextidx]:
+                self.heap[idx], self.heap[nextidx] = \
+                    self.heap[nextidx], self.heap[idx]
+            idx = nextidx
 
 
 class Test(unittest.TestCase):
@@ -49,7 +50,7 @@ class Test(unittest.TestCase):
         tree = BinaryHeapTree([4,5,6,7,2,1,3])
         tree.push(0)
         self.assertEqual(0, tree.peek())
-    
+
     def test_add_middle_element(self):
         tree = BinaryHeapTree([4,8,6,7,2,1,5])
         tree.push(3)
