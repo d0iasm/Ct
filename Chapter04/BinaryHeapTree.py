@@ -42,7 +42,9 @@ class BinaryHeapTree(object):
             if self.heap[idx] > self.heap[nextidx]:
                 self.heap[idx], self.heap[nextidx] = \
                     self.heap[nextidx], self.heap[idx]
-            idx = nextidx
+                idx = nextidx
+            else:
+                return
 
 
 class Test(unittest.TestCase):
@@ -61,6 +63,18 @@ class Test(unittest.TestCase):
         expected = [0,1,2,3,4,5,6]
         for e in expected:
             self.assertEqual(e, tree.pop())
+
+    def test_push_and_pop(self):
+        tree = BinaryHeapTree([3,5,2])
+        self.assertEqual(2, tree.pop())
+        tree.push(0)
+        tree.push(6)
+        self.assertEqual(0, tree.pop())
+        self.assertEqual(3, tree.pop())
+        tree.push(1)
+        self.assertEqual(1, tree.pop())
+        self.assertEqual(5, tree.pop())
+        self.assertEqual(6, tree.pop())
 
 
 if __name__ == '__main__':
