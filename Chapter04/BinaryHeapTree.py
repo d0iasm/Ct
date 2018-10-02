@@ -38,7 +38,7 @@ class BinaryHeapTree(object):
             if nextidx + 1 < len(self.heap):
                 if self.heap[nextidx+1] < self.heap[nextidx]:
                     nextidx = nextidx + 1
-           
+          
             if self.heap[idx] > self.heap[nextidx]:
                 self.heap[idx], self.heap[nextidx] = \
                     self.heap[nextidx], self.heap[idx]
