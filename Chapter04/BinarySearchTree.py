@@ -35,16 +35,15 @@ class BinarySearchTree(object):
         pass
 
 
-in_order_result = []
-def in_order_for_test(node):
-    if node is not None:
-        in_order_for_test(node.left)
-        in_order_result.append(node.data)
-        in_order_for_test(node.right)
-
-
 class Test(unittest.TestCase):
     def test_insert_bst(self):
+        in_order_result = []
+        def in_order_for_test(node):
+            if node is not None:
+                in_order_for_test(node.left)
+                in_order_result.append(node.data)
+                in_order_for_test(node.right)
+
         data = [5,1,6,3,2]
         bst = BinarySearchTree(Node(4))
         for d in data:
